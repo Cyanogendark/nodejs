@@ -1,12 +1,8 @@
-const http = require('http');
-const PORT = 3000;
+const { Telegraf } = require('telegraf')
+const fetch = require('node-fetch')
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!');
-});
+const bot = new Telegraf(process.env.BOT_TOKEN)
+bot.start((ctx) => ctx.reply('Welcome!'))
+bot.launch()
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-});
+fetch(`https://${process.env.RAILWAY_STATIC_URL}/`).then(console.log).catch(console.error)
